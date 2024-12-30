@@ -1,28 +1,52 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <Sidebar @change-view="changeView" />
+    <div class="main-content">
+      <TopBar />
+      <component :is="currentView" />
+    </div>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Sidebar from "./components/SidebarMenu.vue";
+import TopBar from "./components/TopBar.vue";
+import Dashboard from "./views/DashboardPage.vue";
+import QuizCreator from "./views/QuizCreatorPage.vue";
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    Sidebar,
+    TopBar,
+    Dashboard,
+    QuizCreator,
+  },
+  data() {
+    return {
+      currentView: "Dashboard", // Default view
+    };
+  },
+  methods: {
+    changeView(view) {
+      this.currentView = view === "createQuiz" ? "QuizCreator" : "Dashboard";
+    },
+    handleViewChange(view) {
+      console.log("Event received in App.vue: change-view");
+      console.log("Received view name:", view);
+      this.currentView = view;
+    },
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.main-content {
+  margin-left: 250px; /* Adjust based on your sidebar width */
+  padding: 20px;
+  background-color: #ebdfd7;
+}
+
+* {
+  box-sizing: border-box;
 }
 </style>

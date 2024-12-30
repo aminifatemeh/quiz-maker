@@ -4,6 +4,7 @@
       :class="buttonClass"
       :color="color"
       :elevation="elevation"
+      @click="$emit('click')"
   >
     <!-- Slot for icon -->
     <div class="btn-content">
