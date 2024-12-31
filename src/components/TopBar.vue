@@ -2,7 +2,7 @@
   <v-row class="top-bar-row" no-gutters>
     <!-- Dashboard Title (far left) -->
     <v-col cols="6" class="dashboard-title">
-      <h3>Dashboard</h3>
+      <h3>{{pageTitle}}</h3>
     </v-col>
 
     <!-- Search Input (center) -->
@@ -34,15 +34,14 @@ export default {
       type: String,
       default: "Teacher",
     },
+    pageTitle: {
+      type: String,
+    }
   },
 };
 </script>
 
 <style scoped>
-.top-bar {
-  /* Add some padding for spacing */
-}
-
 .top-bar-row {
   display: flex;
   justify-content: space-between;

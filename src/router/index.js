@@ -13,9 +13,14 @@ const routes = [
         props: route => ({ quiz: route.params.quiz })
     },
     {
-        path: '/',
+        path: '/dashboard',
         name: 'Dashboard',
         component: () => import('@/views/DashboardPage.vue') // Example for your Dashboard route
+    },
+    {
+        path: '/quizzes',
+        name: 'Quizzes',
+
     }
 ];
 

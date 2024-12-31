@@ -61,7 +61,7 @@ export default {
   methods: {
     selectItem(itemName) {
       this.activeItem = itemName;
-      this.$emit("change-view", itemName.toLowerCase());
+      this.$emit("change-view", itemName);
     },
     createProject() {
       this.$emit("change-view", 'createQuiz')

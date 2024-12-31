@@ -2,7 +2,7 @@
   <v-app>
     <Sidebar @change-view="changeView" />
     <div class="main-content">
-      <TopBar />
+      <TopBar :page-title="currentView" />
       <component :is="currentView" />
     </div>
   </v-app>
@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     changeView(view) {
-      this.currentView = view === "createQuiz" ? "QuizCreator" : "Dashboard";
+      this.currentView = view;
     },
     handleViewChange(view) {
       console.log("Event received in App.vue: change-view");
