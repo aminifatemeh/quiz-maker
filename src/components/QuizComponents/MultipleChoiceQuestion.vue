@@ -1,24 +1,33 @@
 <template>
-  <v-container>
+  <v-container class="pa-0 ma-0">
     <div
       v-for="(options, index) in questionData.options"
       :key="index"
-      class="option-row"
+      class="d-flex align-center"
     >
-      <v-col cols="8">
+      <v-col class="ma-0 pa-0" cols="8">
         <v-text-field
-          :label="'option' + (index + 1)"
+          :label="'Option ' + (index + 1)"
           v-model="questionData.options[index].text"
           outlined
         />
       </v-col>
-      <v-checkbox
-        label="correct"
-        v-model="questionData.options[index].isCorrect"
-      />
-      <v-btn icon color="error" @click="removeOption(index)">
-        <v-icon>mdi-delete</v-icon>
-      </v-btn>
+      <div class="d-flex align-start flex-column gap-0">
+        <v-checkbox
+          label="correct"
+          v-model="questionData.options[index].isCorrect"
+          class="mt-0 ml-2 pa-0"
+          hide-details
+        />
+        <v-btn
+          icon
+          color="error"
+          @click="removeOption(index)"
+          class="ma-0 pa-0"
+        >
+          <v-icon>mdi-delete</v-icon>
+        </v-btn>
+      </div>
     </div>
     <v-btn color="primary" @click="addOption">Add Option</v-btn>
   </v-container>
