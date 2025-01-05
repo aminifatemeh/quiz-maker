@@ -64,6 +64,7 @@ export default {
       this.$emit("change-view", itemName);
     },
     createProject() {
+      this.activeItem = ''
       this.$emit("change-view", 'createQuiz')
       console.log("Create new Quiz")
     }

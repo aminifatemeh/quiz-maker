@@ -3,7 +3,7 @@
     <div
       v-for="(options, index) in questionData.options"
       :key="index"
-      class="d-flex align-center"
+      class="d-flex align-start"
     >
       <v-col class="ma-0 pa-0" cols="8">
         <v-text-field
@@ -57,7 +57,7 @@ export default {
       this.emitQuestion();
     },
     emitQuestion() {
-      this.$emit("update-question", this.question);
+      this.$emit("update-question", this.questionData);
     },
   },
   watch: {

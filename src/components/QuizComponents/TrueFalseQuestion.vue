@@ -1,10 +1,11 @@
 <template>
-  <v-container class="pa-0">
+  <v-container class="pa-0 ma-0">
     <v-radio-group
       v-model="questionData.correctAnswer"
       label="Select the correct answer"
       row
       class="pa-0"
+      @change="emitQuestion"
     >
       <v-radio label="True" value="True" />
       <v-radio label="False" value="False" />
@@ -30,11 +31,13 @@ export default {
     };
   },
   methods: {
+    // Emit the updated question data when correct answer changes
     emitQuestion() {
       this.$emit("update-question", this.questionData);
     },
   },
   watch: {
+    // Watch for changes in the question prop and update questionData
     question: {
       handler(newQuestion) {
         this.questionData = {

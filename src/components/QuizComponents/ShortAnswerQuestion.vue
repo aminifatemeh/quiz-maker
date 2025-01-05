@@ -5,6 +5,7 @@
       v-model="questionData.correctAnswer"
       outlined
       class="pa-0"
+      @input="emitQuestion"
     />
   </v-container>
 </template>
@@ -27,19 +28,9 @@ export default {
     };
   },
   methods: {
+    // Emit the updated question data when correct answer changes
     emitQuestion() {
       this.$emit("update-question", this.questionData);
-    },
-  },
-  watch: {
-    question: {
-      handler(newQuestion) {
-        this.questionData = {
-          ...newQuestion,
-          correctAnswer: newQuestion.correctAnswer,
-        };
-      },
-      deep: true,
     },
   },
 };

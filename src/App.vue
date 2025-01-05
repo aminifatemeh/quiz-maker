@@ -28,7 +28,21 @@ export default {
   },
   methods: {
     changeView(view) {
-      this.currentView = view;
+      // Change the current view based on the clicked menu item
+      switch (view) {
+        case "Dashboard":
+          this.currentView = "Dashboard";
+          break;
+        case "Quizzes":
+          this.currentView = "Quizzes";
+          break;
+        case "createQuiz":
+          this.currentView = "QuizCreator";
+          break;
+        default:
+          this.currentView = "Dashboard";
+          break;
+      }
     },
     handleViewChange(view) {
       console.log("Event received in App.vue: change-view");
@@ -43,6 +57,7 @@ export default {
 .main-content {
   margin-left: 250px; /* Adjust based on your sidebar width */
   padding: 20px;
+  height: 100%;
   background-color: #ebdfd7;
 }
 
