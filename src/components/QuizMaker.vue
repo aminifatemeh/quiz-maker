@@ -91,13 +91,16 @@ export default {
     },
     // Inside your methods
     previewQuiz() {
-      const quiz = this.quizQuestions;
-      const previewUrl = this.$router.resolve({
-        name: "QuizPreview",
-        params: { quiz },
-      }).href;
+      if (this.quizQuestions.length === 0) {
+        alert("Please add at least one question to preview the quiz.");
+        return;
+      }
 
-      window.open(previewUrl, "_blank"); // Open in a new tab
+      console.log("Navigating to QuizPreview");
+      this.$router.push({
+        name: "QuizPreview",
+        params: { quizQuestions: this.quizQuestions },
+      });
     },
   },
 };
@@ -125,17 +128,23 @@ export default {
         :question="currentQuestion"
         @update-question="updateCurrentQuestion"
       />
-
-      <v-btn color="success" class="mt-4" @click="addQuestionToQuiz">
+    </div>
+    <div>
+      <v-btn
+        v-if="selectedQuestionType"
+        color="success"
+        class="mt-4 mr-4"
+        @click="addQuestionToQuiz"
+      >
         Add Question
       </v-btn>
-      <v-btn color="info" class="mt-4 ml-4" @click="previewQuiz">
+      <v-btn color="info" class="mt-4" @click="previewQuiz">
         Preview Quiz
       </v-btn>
     </div>
 
     <div v-if="quizQuestions.length">
-      <h3>Quiz Questions</h3>
+      <h3 class="my-2">Quiz Questions</h3>
       <ul>
         <li v-for="(question, index) in quizQuestions" :key="index">
           <strong>Q{{ index + 1 }}:</strong> {{ question.text }}

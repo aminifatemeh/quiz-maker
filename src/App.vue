@@ -3,7 +3,8 @@
     <Sidebar @change-view="changeView" />
     <div class="main-content">
       <TopBar :page-title="currentView" />
-      <component :is="currentView" />
+      <component v-if="$route.name !== 'QuizPreview'" :is="currentView" />
+      <router-view />
     </div>
   </v-app>
 </template>
@@ -13,6 +14,7 @@ import Sidebar from "./components/SidebarMenu.vue";
 import TopBar from "./components/TopBar.vue";
 import Dashboard from "./views/DashboardPage.vue";
 import QuizCreator from "./views/QuizCreatorPage.vue";
+import QuizPreview from "@/views/QuizPreview.vue";
 
 export default {
   components: {
@@ -20,6 +22,7 @@ export default {
     TopBar,
     Dashboard,
     QuizCreator,
+    QuizPreview,
   },
   data() {
     return {
