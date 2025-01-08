@@ -6,33 +6,36 @@
         <img src="@/assets/logo.svg" alt="Logo" class="logo" />
       </v-col>
       <v-col class="title-container" cols="8">
-        <h3 style="color: white;">Quiz Maker</h3>
+        <h3 style="color: white">Quiz Maker</h3>
       </v-col>
     </v-row>
 
     <!-- Create New Quiz Button -->
     <BaseButton
-        label="Create New Quiz"
-        icon-name="plus-icon"
-        color="#FFFFFF"
-        class="my-16"
-        @click="createProject"
+      label="Create New Quiz"
+      icon-name="plus-icon"
+      color="#FFFFFF"
+      class="my-16"
+      @click="selectItem('QuizMakerPage')"
     />
 
     <!-- Sidebar Menu Items -->
     <v-list>
       <v-list-item
-          v-for="(item, index) in menuItems"
-          :key="index"
-          :class="{ 'active-item': activeItem === item.name }"
-          @click="selectItem(item.name)"
+        v-for="(item, index) in menuItems"
+        :key="index"
+        :class="{ 'active-item': activeItem === item.name }"
+        @click="selectItem(item.name)"
       >
         <v-list-item-icon>
           <BaseIcon :name="item.icon" />
         </v-list-item-icon>
         <v-list-item-content>
           <v-list-item-title
-              :class="{ 'white-text': activeItem !== item.name, 'black-text': activeItem === item.name }"
+            :class="{
+              'white-text': activeItem !== item.name,
+              'black-text': activeItem === item.name,
+            }"
           >
             {{ item.name }}
           </v-list-item-title>
@@ -45,9 +48,15 @@
 <script>
 import BaseButton from "@/components/BaseComponents/BaseButton.vue";
 import BaseIcon from "@/components/BaseComponents/BaseIcon.vue";
+import QuizMakerPage from "@/views/QuizMakerPage.vue";
 
 export default {
   name: "SidebarMenu",
+  computed: {
+    QuizMakerPage() {
+      return QuizMakerPage;
+    },
+  },
   components: { BaseButton, BaseIcon },
   data() {
     return {
@@ -60,18 +69,17 @@ export default {
   },
   methods: {
     selectItem(itemName) {
-      this.activeItem = itemName;
-      this.$emit("change-view", itemName);
+      if (this.$route.name === itemName) {
+        // Avoid redundant navigation
+        return;
+      }
+      this.$router.push({
+        name: itemName,
+      });
     },
-    createProject() {
-      this.activeItem = ''
-      this.$emit("change-view", 'createQuiz')
-      console.log("Create new Quiz")
-    }
   },
 };
 </script>
-
 
 <style scoped>
 .sidebar {
@@ -98,6 +106,4 @@ export default {
 .v-list-item {
   cursor: pointer;
 }
-
-
 </style>
